@@ -1,5 +1,88 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<script></script>
+		<title>How long have you lasted?</title>
+		<link rel="icon" href="favicon.ico">
+		<style>
+			body, html {
+				height:100%;
+				margin:0;
+				margin-top:0;
+				padding:0;
+				border:;
+			}
+			.bgimg {
+				height:100%;
+			}
+			.center {
+				padding:0;
+				border:0;
+				margin:0;
+				background-image:url(https://www.toptal.com/designers/subtlepatterns/patterns/pink%20dust.png);
+				height:100%;
+			}
+			.text {
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    color:white;
+			    text-align:center;
+			}
+			h1 {
+				font-size:50px;
+			}
+			p {
+				font-size:30px;
+			}
+			
+		</style>
+		<script>
+
+		</script>
 	</head>
+	<body>
+		<div class="center">
+		</div>
+		<div class="text">
+			<h1 style="font-size:80px">How long have you lasted?</h1>
+			<p id="time"></p>
+			<br>
+			<h1>Other means of measurement:  </h1>
+			<p><strong>Hours: </strong><span id="hours"></span></p>
+			<p><strong>Minutes: </strong><span id="mins"></span></p>
+			<p><strong>Seconds: </strong><span id="secs"></span></p>
+		</div>
+		<script>
+			setTimeout(findTime, 5)
+			function findTime() {
+				var d = new Date();
+				var date = d.getDate();
+				var length = date - 1
+				var hours = d.getHours();
+				var length = length * 24 + hours
+				var mins = d.getMinutes();
+				var secs = d.getSeconds();
+
+				var final = "You have lasted "+length+" hours, "+mins+" minutes, and "+secs+" seconds"
+				document.getElementById("time").innerHTML = final;
+
+				//Hours Only
+
+				var fullHours = length
+				document.getElementById("hours").innerHTML = fullHours
+
+				//minutes only
+				var fullMinutes = length*60 + mins
+				document.getElementById("mins").innerHTML = fullMinutes
+
+				//seconds only
+				var fullSeconds = fullMinutes*60 + secs
+				document.getElementById("secs").innerHTML = fullSeconds
+
+				setTimeout(findTime, 1)
+			}
+
+		</script>
+	</body>
 </html>
