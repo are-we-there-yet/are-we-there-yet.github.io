@@ -65,20 +65,24 @@
 				var secs = d.getSeconds();
 
 				var final = "You have lasted "+length+" hours, "+mins+" minutes, and "+secs+" seconds"
+				
 				document.getElementById("time").innerHTML = final;
 
 				//Hours Only
 
 				var fullHours = length
-				document.getElementById("hours").innerHTML = fullHours
+				var finalH = fullHours.toLocaleString();
+				document.getElementById("hours").innerHTML = finalH
 
 				//minutes only
 				var fullMinutes = length*60 + mins
-				document.getElementById("mins").innerHTML = fullMinutes
+				var finalM = fullMinutes.toLocaleString();
+				document.getElementById("mins").innerHTML = finalM
 
 				//seconds only
 				var fullSeconds = fullMinutes*60 + secs
-				document.getElementById("secs").innerHTML = fullSeconds
+				var finalS = fullSeconds.toLocaleString();
+				document.getElementById("secs").innerHTML = finalS
 
 				setTimeout(findTime, 1)
 			}
