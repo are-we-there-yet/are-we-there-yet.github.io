@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>How long have you lasted?</title>
+		<title id="title">How long have you lasted?</title>
 		<link rel="icon" href="favicon.ico">
 		<style>
 			body, html {
@@ -10,6 +10,7 @@
 				margin-top:0;
 				padding:0;
 				border:;
+				background-color:black;
 			}
 			.bgimg {
 				height:100%;
@@ -20,6 +21,7 @@
 				margin:0;
 				background-image:url(https://www.toptal.com/designers/subtlepatterns/patterns/pink%20dust.png);
 				height:100%;
+				background-color:black;
 			}
 			.text {
 			    position: absolute;
@@ -29,32 +31,73 @@
 			    color:white;
 			    text-align:center;
 			}
+			.howlong {
+				width:40%;
+			}
+			.timeLeft {
+				width:40%;
+			}
 			h1 {
 				font-size:50px;
 			}
 			p {
 				font-size:30px;
 			}
-			
+			.red {
+				color:red;
+			}
+			a {
+				color:white;
+				text-decoration:underline;
+			}
 		</style>
 		<script>
-
 		</script>
 	</head>
 	<body>
 		<div class="center">
 		</div>
 		<div class="text">
+			
 			<h1 style="font-size:80px">How long have you lasted?</h1>
 			<p id="time"></p>
+			<br><br>
+			<div id="howLonger" hidden>
+			<p style="color:red">How much longer?</p><p style="color:red" id="timeL"></p>
+			</div>
 			<br>
 			<h1>Other means of measurement:  </h1>
-			<p><strong>Hours: </strong><span id="hours"></span></p>
-			<p><strong>Minutes: </strong><span id="mins"></span></p>
-			<p><strong>Seconds: </strong><span id="secs"></span></p>
+		<center>
+			<div class="howlong" id="howLong" style="">
+				<p><strong>Hours: </strong><span id="hours"></span></p>
+				<p><strong>Minutes: </strong><span id="mins"></span></p>
+				<p><strong>Seconds: </strong><span id="secs"></span></p>
+			</div>
+			
+			<div class="timeLeft" id="timeLeft" style="float:right" hidden>
+				<p class="red"><strong>Hours: </strong><span id="hoursLeft"></span></p>
+				<p class="red"><strong>Minutes: </strong><span id="minsLeft"></span></p>
+				<p class="red"><strong>Seconds: </strong><span id="secsLeft"></span></p>
+			</div>
+		</center>
+
+			<br><br>
+
+			<a href="javascript:show()" id="show">How much longer?</a>
 		</div>
 		<script>
+
+			var title = 0
+
+			function show() {
+				document.getElementById("howLong").style.float = "left"
+				document.getElementById("timeLeft").hidden = false
+				document.getElementById("howLonger").hidden = false
+				document.getElementById("show").hidden = true
+			}
+
 			setTimeout(findTime, 5)
+
 			function findTime() {
 				var d = new Date();
 				var date = d.getDate();
@@ -63,30 +106,62 @@
 				var length = length * 24 + hours
 				var mins = d.getMinutes();
 				var secs = d.getSeconds();
-
 				var final = "You have lasted "+length+" hours, "+mins+" minutes, and "+secs+" seconds"
 				
 				document.getElementById("time").innerHTML = final;
-
 				//Hours Only
-
 				var fullHours = length
 				var finalH = fullHours.toLocaleString();
 				document.getElementById("hours").innerHTML = finalH
-
 				//minutes only
 				var fullMinutes = length*60 + mins
 				var finalM = fullMinutes.toLocaleString();
 				document.getElementById("mins").innerHTML = finalM
-
 				//seconds only
 				var fullSeconds = fullMinutes*60 + secs
 				var finalS = fullSeconds.toLocaleString();
 				document.getElementById("secs").innerHTML = finalS
-
 				setTimeout(findTime, 1)
-			}
 
+				//time left
+
+				var d = new Date();
+				var left = d.getHours();
+				var left = 23-left
+				var Mleft = d.getMinutes();
+				var Mleft = 59-Mleft
+				var Sleft = d.getSeconds();
+				var Sleft = 59-Sleft
+				var Dleft = d.getDate()
+				var Dleft = 29-Dleft
+				var finalL = Dleft+" Days, "+left+" Hours, "+Mleft+" Minutes, "+Sleft+" Seconds"
+				document.getElementById("timeL").innerHTML = finalL
+
+				//hours left only
+
+				var fullHoursLeft = Dleft*24+left
+				var fullHoursLeftPrint = fullHoursLeft.toLocaleString()
+				document.getElementById("hoursLeft").innerHTML = fullHoursLeftPrint
+
+				//minutes left only
+
+				var fullMinutesLeft = fullHoursLeft*60+Mleft
+				var fullMinutesLeftPrint = fullMinutesLeft.toLocaleString()
+				document.getElementById("minsLeft").innerHTML = fullMinutesLeftPrint
+
+				//seconds left only
+
+				var fullSecondsLeft = fullMinutesLeft*60+Sleft
+				var fullSecondsLeft = fullSecondsLeft+1
+				var fullSecondsLeftPrint = fullSecondsLeft.toLocaleString()
+				document.getElementById("secsLeft").innerHTML = fullSecondsLeftPrint
+
+				if (title === 1) {document.getElementById("title").innerHTML = final}
+			}
+		</script>
+
+		<script id="init">
+			
 		</script>
 		
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -95,7 +170,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-128586279-1');
 </script>
 
